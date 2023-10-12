@@ -1,0 +1,80 @@
+<form [formGroup]="applicationFormGroup">
+    <div>
+        <label for="firstNameControl">
+            <span>First name </span>
+            <span [ngClass]="{'invalid-text':applicationFormGroup.controls.firstName.errors}">*</span>
+        </label>
+        <input [ngClass]="{'invalid-border':applicationFormGroup.controls.firstName.errors}" type="text"
+            id="firstNameControl" formControlName="firstName">
+    </div>
+    <div>
+        <label for="lastNameControl">
+            <span> Last name</span>
+            <span [ngClass]="{'invalid-text':applicationFormGroup.controls.lastName.errors}">*</span>
+        </label>
+        <input [ngClass]="{'invalid-border':applicationFormGroup.controls.lastName.errors}" type="text"
+            id="lastNameControl" formControlName="lastName">
+    </div>
+    <div>
+        <label for="phoneNumberControl">
+            <span>Phone number</span>
+            <span [ngClass]="{'invalid-text':applicationFormGroup.controls.phoneNumber.errors}">*</span>
+        </label>
+        <input [ngClass]="{'invalid-border':applicationFormGroup.controls.phoneNumber.errors}" type="text"
+            id="phoneNumberControl" formControlName="phoneNumber">
+    </div>
+    <div>
+        <label for="emailAddressControl">
+            <span>Email address</span>
+            <span [ngClass]="{'invalid-text':applicationFormGroup.controls.emailAddress.errors}">*</span>
+        </label>
+        <input [ngClass]="{'invalid-border':applicationFormGroup.controls.emailAddress.errors}" type="text"
+            id="emailAddressControl" formControlName="emailAddress">
+    </div>
+    <div>
+        <label for="addressLine1Control">
+            <span>Address Line1</span>
+            <span [ngClass]="{'invalid-text':applicationFormGroup.controls.addressLine1.errors}">*</span>
+        </label>
+        <input [ngClass]="{'invalid-border':applicationFormGroup.controls.addressLine1.errors}" type="text"
+            id="addressLine1Control" formControlName="addressLine1">
+    </div>
+    <div>
+        <label for="addressLine1Contro2">Address Line2</label>
+        <input type="text" id="addressLine1Contro2" formControlName="addressLine2">
+    </div>
+    <div>
+        <label for="contryControl"></label>
+        <select id="contryControl" formControlName="country" (change)="handleCountryChange()">
+            <option value="">Select a country</option>
+            <option *ngFor="let item of countries">{{item.name}}</option>
+        </select>
+    </div>
+    <div>
+        <label for="stateControl">State</label>
+        <select type="text" id="stateControl" formControlName="state" (change)="handleStateChange()">
+            <option value="">Select a state</option>
+            <option *ngFor="let state of states">{{state.name}}</option>
+        </select>
+    </div>
+    <div>
+        <label for="cityControl">
+            <span>City</span>
+            <span [ngClass]="{'invalid-text':applicationFormGroup.controls.city.errors}">*</span>
+        </label>
+        <select [ngClass]="{'invalid-border':applicationFormGroup.controls.city.errors}" type="text" id="cityControl"
+            formControlName="city">
+            <option value="">Select a city</option>
+            <option *ngFor="let city of cities">{{city}}</option>
+        </select>
+    </div>
+    <ul class="errors-list">
+        <li *ngIf="applicationFormGroup.controls.firstName.errors?.['required']">First name is required</li>
+        <li *ngIf="applicationFormGroup.controls.lastName.errors?.['required']">Last name is required</li>
+        <li *ngIf="applicationFormGroup.controls.emailAddress.errors?.['required']">Email is required</li>
+        <li *ngIf="applicationFormGroup.controls.addressLine1.errors?.['required']">Address is required</li>
+        <li *ngIf="applicationFormGroup.controls.city.errors?.['required']">City is required</li>
+    </ul>
+    <button (click)="submitApplicationForm">Submit</button>
+   <div *ngIf="applicationFormGroup.valid">{{applicationFormGroup.value | json}}</div>
+</form>
